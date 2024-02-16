@@ -1,5 +1,4 @@
 /* Reset some default browser styles */
-@media only screen and (max-width:767px){
 body, h1, p, form {
     margin: 0;
     padding: 0;
@@ -14,13 +13,15 @@ h1 {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;#42445A
-    position:fixed;
+    padding: 10px;
+    position: fixed;
+    width: 100%; /* Adjusted width for full-width header */
+    top: 0; /* Fixed header at the top */
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 60px auto 20px; /* Added margin-top for space below header */
     padding: 20px;
     background-color: white;
     border-radius: 5px;
@@ -79,171 +80,115 @@ h1 {
 #news-form button[type="submit"]:hover {
     background-color: #555;
 }
-#newsImg{
-  width: 80%;
-  margin-left: 10%;
-  border-radius: 20px;
-  margin-top:10px;
+
+#newsImg {
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 20px;
+    margin-top: 10px;
 }
-h2{
-  font-style: bold;
-  font-size: 20px;
-  color: darkslategrey;
+
+h2 {
+    font-style: bold;
+    font-size: 20px;
+    color: darkslategrey;
 }
-.container2{
+
+.container2 {
     margin: 0 auto;
     padding: 20px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
-.head{
-  
- 
+
+.head {
+    
 }
-#news-list{
-margin: 20px;
+
+#news-list {
+    margin: 20px;
 }
-.logo{
-  text-align: left;
-  color: lightslategrey;
-  font-style: bold;
-  font-size: 30px;
-  width: 30%;
+
+.logo {
+    text-align: left;
+    color: lightslategrey;
+    font-style: bold;
+    font-size: 30px;
+    width: 30%;
 }
-.logotext{
-  color:grey;
+
+.logotext {
+    color: grey;
 }
-.date-time,.logo{
-  display: inline-block;
+
+.date-time, .logo {
+    display: inline-block;
 }
-.date-time{
+
+.date-time {
     text-align: right;
-    width:100%;
+    width: 100%;
     color: lightslategray;
 }
-}
-@media only screen and (min-width:992px){
-    body, h1, p, form {
-        margin: 0;
-        padding: 0;
-    }
-    
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-    }
-    
+
+/* Media query for screens up to 767px */
+@media only screen and (max-width: 767px) {
     h1 {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 10px;#42445A
-        position:fixed;
+        padding: 10px;
+        position: static;
     }
-    
+
+    .container {
+        max-width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    #news-list {
+        margin: 10px;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Media query for screens from 768px to 991px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    h1 {
+        padding: 10px;
+        position: static;
+    }
+
+    .container {
+        max-width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+    #news-list {
+        margin: 10px;
+    }
+}
+
+/* Media query for screens from 992px and above */
+@media only screen and (min-width: 992px) {
+    h1 {
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+    }
+
     .container {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 60px auto 20px;
         padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Styling for news articles on the reading page */
+
     #news-list {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .news-item {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    }
-    
-    .news-item img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* Styling for the form on the writing page */
-    #news-form {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    }
-    
-    #news-form label {
-        font-weight: bold;
-    }
-    
-    #news-form input[type="text"],
-    #news-form textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    #news-form button[type="submit"] {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    #news-form button[type="submit"]:hover {
-        background-color: #555;
-    }
-    #newsImg{
-      width: 50%;
-      margin-left: 20%;
-      border-radius: 20px;
-      margin-top:10px;
-    }
-    h2{
-      font-style: bold;
-      font-size: 20px;
-      color: darkslategrey;
-    }
-    .container2{
-        margin: 0 auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    }
-    .head{
-      
-     
-    }
-    #news-list{
-    margin: 20px;
-    }
-    .logo{
-      text-align: left;
-      color: lightslategrey;
-      font-style: bold;
-      font-size: 30px;
-      width: 30%;
-    }
-    .logotext{
-      color:grey;
-    }
-    .date-time,.logo{
-      display: inline-block;
-    }
-    .date-time{
-        text-align: right;
-        width:100%;
-        color: lightslategray;
+        margin: 20px;
     }
 }
