@@ -1,83 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name ='viewport' content='width=divice-width,initial-scale=1.0'>
-        <title>News Writer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Writer</title>
 </head>
 <body>
-  <!-- Include the Firebase JavaScript SDK -->
-<!-- Include other Firebase services if needed -->
-<!-- Your custom JavaScript file -->
     <form id="news-form">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
         
         <label for="content">Content:</label><br>
         <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
-        <label for="image-url">Image URL:</label>
-        <input type="url" id="image-upload" name="image-url"><br><br>
-        
+
+        <label for="image-upload">Select Image:</label>
+        <input type="file" id="image-upload" name="image-upload" accept="image/*"><br><br>
+
         <button type="submit">Submit News</button>
     </form>
-    <!-- Include the Firebase JavaScript SDK directly -->
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
-<!-- Other Firebase service scripts as needed -->
 
-<!-- Include other Firebase services if needed -->
-<!-- Your custom JavaScript file -->
-<script type="module">
-    // Import Firebase services as needed
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
-import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js';
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js" type="module"></script>
 
-// Initialize Firebase with your Firebase project configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyBEw7edw-jRq47N_d1fJUvBSVnROJ6eCcE",
-    authDomain: "messanger-817c9.firebaseapp.com",
-    projectId: "messanger-817c9",
-    storageBucket: "messanger-817c9.appspot.com",
-    messagingSenderId: "678307855723",
-    appId: "1:678307855723:web:ac21ee338a71dd34f9602e"
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js';
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js';
+        
+        const firebaseConfig = {
+  apiKey: "AIzaSyBEw7edw-jRq47N_d1fJUvBSVnROJ6eCcE",
+  authDomain: "messanger-817c9.firebaseapp.com",
+  databaseURL: "https://messanger-817c9-default-rtdb.firebaseio.com",
+  projectId: "messanger-817c9",
+  storageBucket: "messanger-817c9.appspot.com",
+  messagingSenderId: "678307855723",
+  appId: "1:678307855723:web:ac21ee338a71dd34f9602e",
+  measurementId: "G-37SG00MKXC"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-document.addEventListener("DOMContentLoaded", function () {
-    const newsForm = document.getElementById("news-form");
+        document.addEventListener("DOMContentLoaded", function () {
+            const newsForm = document.getElementById("news-form");
 
-    newsForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+            newsForm.addEventListener("submit", function (e) {
+                e.preventDefault();
 
-        const title = document.getElementById("title").value;
-        const content = document.getElementById("content").value;
-        const imageUrl = document.getElementById("image-upload").value;
+                const title = document.getElementById("title").value;
+                const content = document.getElementById("content").value;
+                const imageFile = document.getElementById("image-upload").files[0];
 
-        // Add the news article to Firestore
-        addDoc(collection(db, "news"), {
-            title,
-            content,
-            imageUrl,
-            timestamp: new Date().toLocaleString() // Add a timestamp
-        })
-        .then(() => {
-            // Redirect to the news reading page (adjust the URL accordingly)
-            window.location.href = "newsmhbdreader.html";
-        })
-        .catch((error) => {
-            console.error("Error adding news: ", error);
-            
+                // Upload the image to Firebase Storage
+                const storageRef = ref(storage, 'images/' + imageFile.name);
+                uploadBytes(storageRef, imageFile).then((snapshot) => {
+                    console.log('Image uploaded successfully');
+                    // Get the download URL for the image
+                    getDownloadURL(snapshot.ref).then((imageUrl) => {
+                        // Add the news article to Firestore
+                        addDoc(collection(db, "news"), {
+                            title,
+                            content,
+                            imageUrl,
+                            timestamp: new Date().toLocaleString() // Add a timestamp
+                        })
+                        .then(() => {
+                            // Redirect to the news reading page (adjust the URL accordingly)
+                           alert("News Sucessfully sended to news page");
+                        })
+                        .catch((error) => {
+                            console.error("Error adding news: ", error);
+                        });
+                    });
+                });
+            });
         });
-    });
-});
-</script>
-
-
-   <link rel="stylesheet" type="text/css" href="styles.css">
-
-<!-- Include other Firebase services if you're using them (e.g., Firebase Storage, Firebase Messaging, etc.) -->
-
+    </script>
+     <link rel="stylesheet" type="text/css" href="styles.css">
 </body>
 </html>
